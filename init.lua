@@ -12,6 +12,7 @@ require('packer').startup(function(use)
   use 'Mofiqul/dracula.nvim'
   use 'wbthomason/packer.nvim'
   use 'mattn/emmet-vim'
+  use 'tpope/vim-dispatch'
   use {
     'nvim-tree/nvim-tree.lua',
     requires = {
@@ -59,7 +60,6 @@ require('packer').startup(function(use)
   use 'tpope/vim-rhubarb'
   use 'lewis6991/gitsigns.nvim'
 
-  use 'navarasu/onedark.nvim' -- Theme inspired by Atom
   use {
     'nvim-lualine/lualine.nvim',
     requires = { 'kyazdani42/nvim-web-devicons', opt = true}
@@ -133,12 +133,13 @@ vim.o.smartcase = true
 vim.o.updatetime = 250
 vim.wo.signcolumn = 'yes'
 
+-- Tabspace altough it doest work I believe due to sleuth
 vim.o.tabstop = 4
 vim.o.softtabstop = 4
 
 -- Set colorscheme
 vim.o.termguicolors = true
-vim.cmd [[colorscheme onedark]]
+vim.cmd [[colorscheme dracula]]
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
@@ -186,8 +187,8 @@ require('Comment').setup()
 -- Enable `lukas-reineke/indent-blankline.nvim`
 -- See `:help indent_blankline.txt`
 require('indent_blankline').setup {
-  char = '┊',
   show_trailing_blankline_indent = false,
+  char = 'l'
 }
 
 -- Gitsigns
@@ -444,6 +445,7 @@ cmp.setup {
 
 
 require('nvim-tree').setup()
+vim.keymap.set({'n', 'i'}, '<C-b>', function() vim.cmd('NvimTreeToggle') end)
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
