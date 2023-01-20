@@ -13,15 +13,14 @@ require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
   use 'mattn/emmet-vim'
   use 'tpope/vim-dispatch'
+  use 'windwp/nvim-ts-autotag'
   use {
     'nvim-tree/nvim-tree.lua',
     requires = {
-      'nvim-tree/nvim-web-devicons',
+      'nvim-tree/nvim-web-devicons', -- optional, for file icons
     },
-    tag = 'nightly'
+    tag = 'nightly' -- optional, updated every week. (see issue #1193)
   }
-
-
 
   use { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
@@ -60,10 +59,7 @@ require('packer').startup(function(use)
   use 'tpope/vim-rhubarb'
   use 'lewis6991/gitsigns.nvim'
 
-  use {
-    'nvim-lualine/lualine.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true}
-  }
+  use 'nvim-lualine/lualine.nvim'
   use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
   use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
   use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
@@ -137,6 +133,9 @@ vim.wo.signcolumn = 'yes'
 vim.o.tabstop = 4
 vim.o.softtabstop = 4
 
+-- Open split to the right
+vim.o.splitright = true
+
 -- Set colorscheme
 vim.o.termguicolors = true
 vim.cmd [[colorscheme dracula]]
@@ -206,6 +205,7 @@ require('gitsigns').setup {
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup {
+  file_ignore_patterns = {"node_modules"},
   defaults = {
     mappings = {
       i = {
@@ -240,9 +240,12 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'help', 'vim', 'javascript' },
+  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'help', 'vim', 'javascript', 'tsx'},
 
   highlight = { enable = true },
+  autotag = {
+    enable = true
+  },
   indent = { enable = true, disable = { 'python' } },
   incremental_selection = {
     enable = true,
@@ -445,6 +448,8 @@ cmp.setup {
 
 
 require('nvim-tree').setup()
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 vim.keymap.set({'n', 'i'}, '<C-b>', function() vim.cmd('NvimTreeToggle') end)
 
 -- The line beneath this is called `modeline`. See `:help modeline`
