@@ -1,4 +1,4 @@
--- Install packer
+--border Install packer
 local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
 local is_bootstrap = false
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
@@ -240,7 +240,7 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'help', 'vim', 'javascript', 'tsx'},
+  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'help', 'vim', 'javascript', 'tsx', 'css'},
 
   highlight = { enable = true },
   autotag = {
@@ -363,7 +363,12 @@ local servers = {
   -- gopls = {},
   -- pyright = {},
   -- rust_analyzer = {},
-  -- tsserver = {},
+  tsserver = {},
+  cssls = {},
+  eslint = {},
+  html = {},
+  jsonls = {},
+  volar = {},
 
   sumneko_lua = {
     Lua = {
@@ -451,6 +456,8 @@ require('nvim-tree').setup()
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.keymap.set({'n', 'i'}, '<C-b>', function() vim.cmd('NvimTreeToggle') end)
+vim.keymap.set({'n', 'i'}, '<leader>q', function() vim.cmd('NvimTreeFindFile') end)
+vim.keymap.set({'n', 'i'}, '<leader>w', function() vim.cmd('NvimTreeCollapse') end)
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
