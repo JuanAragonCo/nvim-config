@@ -14,6 +14,9 @@ require('packer').startup(function(use)
   use 'mattn/emmet-vim'
   use 'tpope/vim-dispatch'
   use 'windwp/nvim-ts-autotag'
+  use 'neoclide/vim-jsx-improve'
+  use 'windwp/nvim-autopairs'
+  use 'tpope/vim-surround'
   use {
     'nvim-tree/nvim-tree.lua',
     requires = {
@@ -62,7 +65,6 @@ require('packer').startup(function(use)
   use 'nvim-lualine/lualine.nvim'
   use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
   use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
-  use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
 
   -- Fuzzy Finder (files, lsp, etc)
   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
@@ -132,6 +134,7 @@ vim.wo.signcolumn = 'yes'
 -- Tabspace altough it doest work I believe due to sleuth
 vim.o.tabstop = 4
 vim.o.softtabstop = 4
+vim.o.shiftwidth = 4
 
 -- Open split to the right
 vim.o.splitright = true
@@ -246,7 +249,7 @@ require('nvim-treesitter.configs').setup {
   autotag = {
     enable = true
   },
-  indent = { enable = true, disable = { 'python' } },
+  indent = { enable = true, disable = { 'python', 'typescriptreact' } },
   incremental_selection = {
     enable = true,
     keymaps = {
@@ -369,6 +372,9 @@ local servers = {
   html = {},
   jsonls = {},
   volar = {},
+  tailwindcss = {},
+  vuels = {},
+  graphql = {},
 
   sumneko_lua = {
     Lua = {
@@ -456,8 +462,10 @@ require('nvim-tree').setup()
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.keymap.set({'n', 'i'}, '<C-b>', function() vim.cmd('NvimTreeToggle') end)
-vim.keymap.set({'n', 'i'}, '<leader>q', function() vim.cmd('NvimTreeFindFile') end)
-vim.keymap.set({'n', 'i'}, '<leader>w', function() vim.cmd('NvimTreeCollapse') end)
+vim.keymap.set({'n', 'i', 'v'}, '<C-s>', function() vim.cmd('wa') end)
+vim.keymap.set({'n'}, '<leader>ff', function() vim.cmd('NvimTreeFindFile') end)
+
+require('nvim-autopairs').setup()
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
