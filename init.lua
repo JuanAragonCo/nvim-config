@@ -458,7 +458,12 @@ cmp.setup {
 }
 
 
-require('nvim-tree').setup()
+require('nvim-tree').setup({
+  git = {
+    enable = true,
+    ignore = false
+  }
+})
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.keymap.set({'n', 'i'}, '<C-b>', function() vim.cmd('NvimTreeToggle') end)
