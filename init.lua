@@ -244,6 +244,7 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
   ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'help', 'vim', 'javascript', 'tsx', 'css'},
+  ignore_install = { "help" },
 
   highlight = { enable = true },
   autotag = {
@@ -376,7 +377,7 @@ local servers = {
   vuels = {},
   graphql = {},
 
-  sumneko_lua = {
+  lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
       telemetry = { enable = false },
@@ -413,7 +414,6 @@ mason_lspconfig.setup_handlers {
 
 -- Turn on lsp status information
 require('fidget').setup()
-
 -- nvim-cmp setup
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
