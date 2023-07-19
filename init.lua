@@ -9,6 +9,11 @@ end
 
 require('packer').startup(function(use)
   -- Package manager
+  use 'tpope/vim-sleuth'
+  use { 'NeogitOrg/neogit', requires = 'nvim-lua/plenary.nvim', 'sindrets/diffview.nvim'}
+  use 'sindrets/diffview.nvim'
+  use 'folke/tokyonight.nvim'
+  use 'ellisonleao/gruvbox.nvim'
   use 'Mofiqul/dracula.nvim'
   use 'wbthomason/packer.nvim'
   use 'mattn/emmet-vim'
@@ -131,17 +136,12 @@ vim.o.smartcase = true
 vim.o.updatetime = 250
 vim.wo.signcolumn = 'yes'
 
--- Tabspace altough it doest work I believe due to sleuth
-vim.o.tabstop = 4
-vim.o.softtabstop = 4
-vim.o.shiftwidth = 4
-
 -- Open split to the right
 vim.o.splitright = true
 
 -- Set colorscheme
 vim.o.termguicolors = true
-vim.cmd [[colorscheme dracula]]
+vim.cmd [[colorscheme tokyonight-storm]]
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
@@ -177,7 +177,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 require('lualine').setup {
   options = {
     icons_enabled = true,
-    theme = 'dracula-nvim',
     component_separators = '/',
     section_separators = { left = '', right = ''},
   },
@@ -208,7 +207,7 @@ require('gitsigns').setup {
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup {
-  file_ignore_patterns = {"node_modules"},
+  file_ignore_patterns = {"node%_modules/.*"},
   defaults = {
     mappings = {
       i = {
@@ -471,6 +470,14 @@ vim.keymap.set({'n', 'i', 'v'}, '<C-s>', function() vim.cmd('wa') end)
 vim.keymap.set({'n'}, '<leader>ff', function() vim.cmd('NvimTreeFindFile') end)
 
 require('nvim-autopairs').setup()
+require('diffview').setup()
+require('neogit').setup {
+  integrations = {
+    diffview = true
+  }
+}
+
+vim.o.tabstop = 4
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
