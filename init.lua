@@ -11,7 +11,6 @@ require('packer').startup(function(use)
   -- Package manager
   use 'tpope/vim-sleuth'
   use { 'NeogitOrg/neogit', requires = 'nvim-lua/plenary.nvim', 'sindrets/diffview.nvim'}
-  use 'sindrets/diffview.nvim'
   use 'folke/tokyonight.nvim'
   use 'ellisonleao/gruvbox.nvim'
   use 'Mofiqul/dracula.nvim'
@@ -30,6 +29,16 @@ require('packer').startup(function(use)
     tag = 'nightly' -- optional, updated every week. (see issue #1193)
   }
 
+use {
+  'j-hui/fidget.nvim',
+  tag = 'legacy',
+  config = function()
+    require("fidget").setup {
+      -- options
+    }
+  end
+}
+
   use { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
     requires = {
@@ -38,7 +47,7 @@ require('packer').startup(function(use)
       'williamboman/mason-lspconfig.nvim',
 
       -- Useful status updates for LSP
-      'j-hui/fidget.nvim',
+      "j-hui/fidget.nvim",
 
       -- Additional lua configuration, makes nvim stuff amazing
       'folke/neodev.nvim',
