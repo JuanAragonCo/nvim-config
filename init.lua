@@ -9,6 +9,11 @@ end
 
 require('packer').startup(function(use)
   -- Package manager
+
+  use "lilydjwg/colorizer"
+  use {'iamcco/markdown-preview.nvim', run = "cd app && npm install", setup = function ()
+    vim.g.mkdp_filetypes = { "markdown" }
+  end, ft = { "markdown" } }
   use 'tpope/vim-sleuth'
   use { 'NeogitOrg/neogit', requires = 'nvim-lua/plenary.nvim', 'sindrets/diffview.nvim'}
   use 'folke/tokyonight.nvim'
