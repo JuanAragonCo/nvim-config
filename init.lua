@@ -93,6 +93,12 @@ require('packer').startup(function(use)
 	-- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
 	use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
 
+	--TODO comments
+	use {
+		"folke/todo-comments.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" }
+	}
+
 	-- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
 	local has_plugins, plugins = pcall(require, 'custom.plugins')
 	if has_plugins then
@@ -492,16 +498,16 @@ vim.keymap.set({'n', 'i', 'v'}, '<C-h>', function() require('harpoon.ui').toggle
 vim.keymap.set({'n', 'i', 'v'}, '<leader>a', function ()
 	require('harpoon.mark').add_file()
 end)
-vim.keymap.set({'n', 'i', 'v'}, '<leader>1', function ()
+vim.keymap.set({'n', 'v'}, '<leader>1', function ()
 	require('harpoon.ui').nav_file(1);
 end)
-vim.keymap.set({'n', 'i', 'v'}, '<leader>2', function ()
+vim.keymap.set({'n', 'v'}, '<leader>2', function ()
 	require('harpoon.ui').nav_file(2);
 end)
-vim.keymap.set({'n', 'i', 'v'}, '<leader>3', function ()
+vim.keymap.set({'n', 'v'}, '<leader>3', function ()
 	require('harpoon.ui').nav_file(3);
 end)
-vim.keymap.set({'n', 'i', 'v'}, '<leader>4', function ()
+vim.keymap.set({'n', 'v'}, '<leader>4', function ()
 	require('harpoon.ui').nav_file(4);
 end)
 
@@ -514,4 +520,3 @@ require('neogit').setup {
 }
 
 vim.o.tabstop = 4
-vim.o.expandtab = false
