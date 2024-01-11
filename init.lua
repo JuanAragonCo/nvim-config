@@ -96,6 +96,12 @@ require('packer').startup(function(use)
 	-- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
 	use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
 
+	--TODO comments
+	use {
+		"folke/todo-comments.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" }
+	}
+
 	-- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
 	local has_plugins, plugins = pcall(require, 'custom.plugins')
 	if has_plugins then
@@ -518,4 +524,3 @@ require('neogit').setup {
 }
 
 vim.o.tabstop = 4
-vim.o.expandtab = false
