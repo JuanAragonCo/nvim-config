@@ -59,6 +59,9 @@ require('packer').startup(function(use)
 		},
 	}
 
+	--Spelling
+	use 'kamykn/spelunker.vim'
+
 	use { -- Autocompletion
 		'hrsh7th/nvim-cmp',
 		requires = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
@@ -487,21 +490,22 @@ vim.keymap.set({'n', 'i', 'v'}, '<C-s>', function() vim.cmd('wa') end)
 vim.keymap.set({'n'}, '<leader>ff', function() vim.cmd('NvimTreeFindFile') end)
 
 -- Harpoon commands
-vim.keymap.set({'n', 'i', 'v'}, '<C-h>', function() require('harpoon.ui').toggle_quick_menu() end)
-vim.keymap.set({'n', 'i', 'v'}, '<C-h>', function() require('harpoon.ui').toggle_quick_menu() end)
-vim.keymap.set({'n', 'i', 'v'}, '<leader>a', function ()
+vim.keymap.set({'n', 'v'}, '<C-h>', function() require('harpoon.ui').toggle_quick_menu() end)
+vim.keymap.set({'n', 'v'}, '<C-h>', function() require('harpoon.ui').toggle_quick_menu() end)
+vim.keymap.set({'n', 'v'}, '<leader>b', function ()
 	require('harpoon.mark').add_file()
+	print("File marked!")
 end)
-vim.keymap.set({'n', 'i', 'v'}, '<leader>1', function ()
+vim.keymap.set({'n', 'v'}, '<leader>1', function ()
 	require('harpoon.ui').nav_file(1);
 end)
-vim.keymap.set({'n', 'i', 'v'}, '<leader>2', function ()
+vim.keymap.set({'n', 'v'}, '<leader>2', function ()
 	require('harpoon.ui').nav_file(2);
 end)
-vim.keymap.set({'n', 'i', 'v'}, '<leader>3', function ()
+vim.keymap.set({'n', 'v'}, '<leader>3', function ()
 	require('harpoon.ui').nav_file(3);
 end)
-vim.keymap.set({'n', 'i', 'v'}, '<leader>4', function ()
+vim.keymap.set({'n', 'v'}, '<leader>4', function ()
 	require('harpoon.ui').nav_file(4);
 end)
 
