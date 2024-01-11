@@ -515,6 +515,11 @@ vim.keymap.set({'n', 'v'}, '<leader>4', function ()
 	require('harpoon.ui').nav_file(4);
 end)
 
+-- Show current file path
+vim.keymap.set({'n'}, '<leader>o', function ()
+	print(vim.fn.expand('%'))
+end)
+
 require('nvim-autopairs').setup()
 require('diffview').setup()
 require('neogit').setup {
