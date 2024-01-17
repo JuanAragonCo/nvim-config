@@ -102,6 +102,9 @@ require('packer').startup(function(use)
 		dependencies = { "nvim-lua/plenary.nvim" }
 	}
 
+	-- Add github copilot
+	use 'github/copilot.vim'
+
 	-- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
 	local has_plugins, plugins = pcall(require, 'custom.plugins')
 	if has_plugins then
@@ -527,5 +530,11 @@ require('neogit').setup {
 		diffview = true
 	}
 }
+
+-- Copilot configs
+vim.g.copilot_no_tab_map = true
+vim.g.copilot_assume_mapped = true
+vim.api.nvim_set_keymap('i', '<C-j>', 'copilot#Accept("<CR>")', { silent = true, expr = true})
+
 
 vim.o.tabstop = 4
