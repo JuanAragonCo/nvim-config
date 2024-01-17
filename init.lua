@@ -492,7 +492,8 @@ require('nvim-tree').setup({
 		ignore = false
 	},
 	view = {
-		number = true
+		number = true,
+		relativenumber = true
 	}
 })
 vim.g.loaded_netrw = 1
