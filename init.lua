@@ -490,6 +490,9 @@ require('nvim-tree').setup({
 	git = {
 		enable = true,
 		ignore = false
+	},
+	view = {
+		number = true
 	}
 })
 vim.g.loaded_netrw = 1
@@ -497,6 +500,7 @@ vim.g.loaded_netrwPlugin = 1
 vim.keymap.set({'n', 'i'}, '<C-b>', function() vim.cmd('NvimTreeToggle') end)
 vim.keymap.set({'n', 'i', 'v'}, '<C-s>', function() vim.cmd('wa') end)
 vim.keymap.set({'n'}, '<leader>ff', function() vim.cmd('NvimTreeFindFile') end)
+vim.keymap.set({'n'}, '<leader>c', function() vim.cmd('NvimTreeCollapse') end)
 
 -- Harpoon commands
 vim.keymap.set({'n', 'v'}, '<C-h>', function() require('harpoon.ui').toggle_quick_menu() end)
