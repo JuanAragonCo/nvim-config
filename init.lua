@@ -85,7 +85,6 @@ require('packer').startup(function(use)
 	use 'lewis6991/gitsigns.nvim'
 
 	use 'nvim-lualine/lualine.nvim'
-	use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
 	use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
 
 	use { 'ThePrimeagen/harpoon', requires = {'nvim-lua/plenary.nvim'} }
@@ -104,6 +103,13 @@ require('packer').startup(function(use)
 
 	-- Add github copilot
 	use 'github/copilot.vim'
+
+	-- Conflict marker
+
+	use { 'akinsho/git-conflict.nvim', tag = "v1.3.0"}
+
+	-- Add indent blankline
+	use { 'lukas-reineke/indent-blankline.nvim', tag = 'v3.3.8' }
 
 	-- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
 	local has_plugins, plugins = pcall(require, 'custom.plugins')
@@ -221,6 +227,8 @@ require('ibl').setup {
 		tab_char = '|',
 	}
 }
+
+require('git-conflict').setup()
 
 -- Gitsigns
 -- See `:help gitsigns.txt`
