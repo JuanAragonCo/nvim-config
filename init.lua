@@ -106,7 +106,9 @@ require('packer').startup(function(use)
 
 	-- Conflict marker
 
-	use { 'akinsho/git-conflict.nvim', tag = "v1.3.0"}
+	use { 'akinsho/git-conflict.nvim', tag = "*", run = function()
+		print("git conflict loaded")
+	end}
 
 	-- Add indent blankline
 	use { 'lukas-reineke/indent-blankline.nvim', tag = 'v3.3.8' }
@@ -228,7 +230,9 @@ require('ibl').setup {
 	}
 }
 
+-- Git conflict parser
 require('git-conflict').setup()
+
 
 -- Gitsigns
 -- See `:help gitsigns.txt`
