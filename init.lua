@@ -10,6 +10,9 @@ end
 require('packer').startup(function(use)
 	-- Package manager
 
+	-- Conflict marker
+	use "rhysd/conflict-marker.vim"
+
 	use "lilydjwg/colorizer"
 	use {'iamcco/markdown-preview.nvim', run = "cd app && npm install", setup = function ()
 		vim.g.mkdp_filetypes = { "markdown" }
@@ -103,12 +106,6 @@ require('packer').startup(function(use)
 
 	-- Add github copilot
 	use 'github/copilot.vim'
-
-	-- Conflict marker
-
-	use { 'akinsho/git-conflict.nvim', tag = "*", run = function()
-		print("git conflict loaded")
-	end}
 
 	-- Add indent blankline
 	use { 'lukas-reineke/indent-blankline.nvim', tag = 'v3.3.8' }
@@ -229,10 +226,6 @@ require('ibl').setup {
 		tab_char = '|',
 	}
 }
-
--- Git conflict parser
-require('git-conflict').setup()
-
 
 -- Gitsigns
 -- See `:help gitsigns.txt`
