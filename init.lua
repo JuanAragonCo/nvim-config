@@ -13,6 +13,10 @@ require('packer').startup(function(use)
 	-- Conflict marker
 	use "rhysd/conflict-marker.vim"
 
+	-- Git worktreee
+
+	use 'ThePrimeagen/git-worktree.nvim'
+
 	use "lilydjwg/colorizer"
 	use {'iamcco/markdown-preview.nvim', run = "cd app && npm install", setup = function ()
 		vim.g.mkdp_filetypes = { "markdown" }
@@ -242,7 +246,7 @@ require('gitsigns').setup {
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup {
-	file_ignore_patterns = {"node%_modules/.*"},
+	file_ignore_patterns = {"node_modules/.*"},
 	defaults = {
 		mappings = {
 			i = {
@@ -252,6 +256,16 @@ require('telescope').setup {
 		},
 	},
 }
+
+-- Git worktree
+require('git-worktree').setup()
+require('telescope').load_extension('git_worktree')
+vim.keymap.set('n', '<leader>cd', function()
+	require('telescope').extensions.git_worktree.git_worktrees()
+end)
+vim.keymap.set('n', '<leader>ad', function()
+	require('telescope').extensions.git_worktree.create_git_worktree()
+end)
 
 -- Todo comments highlight
 require('todo-comments').setup()
