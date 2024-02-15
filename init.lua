@@ -535,8 +535,7 @@ vim.keymap.set({'n'}, '<leader>ff', function() vim.cmd('NvimTreeFindFile') end)
 vim.keymap.set({'n'}, '<leader>c', function() vim.cmd('NvimTreeCollapse') end)
 
 -- Harpoon commands
-vim.keymap.set({'n', 'v'}, '<C-h>', function() require('harpoon.ui').toggle_quick_menu() end)
-vim.keymap.set({'n', 'v'}, '<C-h>', function() require('harpoon.ui').toggle_quick_menu() end)
+vim.keymap.set({'n', 'v'}, '<C-h>', function() require('harpoon.ui').toggle_quick_menu() end,{desc = "Toggle Harpoon"})
 vim.keymap.set({'n', 'v'}, '<leader>b', function ()
 	require('harpoon.mark').add_file()
 	print("File marked!")
