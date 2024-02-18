@@ -9,6 +9,13 @@ end
 
 require('packer').startup(function(use)
 	-- Package manager
+	
+	-- Catppuccin color-scheme
+	use { 'catppuccin/nvim', as = 'catppuccin'}
+
+	-- Silicon / App to take screenshots of code
+
+	use { 'krivahtoo/silicon.nvim', run  = "echo patito && ./install.sh build" }
 
 	-- Conflict marker
 	use "rhysd/conflict-marker.vim"
@@ -178,7 +185,7 @@ vim.o.splitright = true
 
 -- Set colorscheme
 vim.o.termguicolors = true
-vim.cmd [[colorscheme tokyonight-storm]]
+vim.cmd [[colorscheme catppuccin-frappe]]
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
@@ -565,6 +572,14 @@ require('neogit').setup {
 		diffview = true
 	}
 }
+
+-- Silicon config
+
+-- require('silicon').setup({
+-- 	output = {
+-- 		format = "silicon_[hour][minute][second].jpg"
+-- 	}
+-- })
 
 -- Copilot configs
 vim.g.copilot_no_tab_map = true
