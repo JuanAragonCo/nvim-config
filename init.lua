@@ -187,6 +187,9 @@ vim.o.splitright = true
 vim.o.termguicolors = true
 vim.cmd [[colorscheme catppuccin-frappe]]
 
+-- Set jk keymap to escape
+vim.keymap.set('i', 'jk', '<Esc>', { noremap = true })
+
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
 
