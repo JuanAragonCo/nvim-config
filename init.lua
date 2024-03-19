@@ -115,9 +115,6 @@ require('packer').startup(function(use)
 		dependencies = { "nvim-lua/plenary.nvim" }
 	}
 
-	-- Add github copilot
-	use 'github/copilot.vim'
-
 	-- Add indent blankline
 	use { 'lukas-reineke/indent-blankline.nvim', tag = 'v3.3.8' }
 
@@ -583,11 +580,5 @@ require('neogit').setup {
 -- 		format = "silicon_[hour][minute][second].jpg"
 -- 	}
 -- })
-
--- Copilot configs
-vim.g.copilot_no_tab_map = true
-vim.g.copilot_assume_mapped = true
-vim.api.nvim_set_keymap('i', '<C-j>', 'copilot#Accept("<CR>")', { silent = true, expr = true})
-
 
 vim.o.tabstop = 4
