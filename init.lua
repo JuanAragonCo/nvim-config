@@ -45,12 +45,12 @@ require('packer').startup(function(use)
 		requires = {
 			'nvim-tree/nvim-web-devicons', -- optional, for file icons
 		},
-		tag = 'nightly' -- optional, updated every week. (see issue #1193)
+		tag = 'v1.1' -- optional, updated every week. (see issue #1193)
 	}
 
 	use {
 		'j-hui/fidget.nvim',
-		tag = 'legacy',
+		tag = 'v1.4.0',
 		config = function()
 			require("fidget").setup {
 				-- options
