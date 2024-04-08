@@ -9,13 +9,12 @@ end
 
 require('packer').startup(function(use)
 	-- Package manager
-	
 	-- Catppuccin color-scheme
-	use { 'catppuccin/nvim', as = 'catppuccin'}
+	use { 'catppuccin/nvim', as = 'catppuccin' }
 
 	-- Silicon / App to take screenshots of code
 
-	use { 'krivahtoo/silicon.nvim', run  = "echo patito && ./install.sh build" }
+	use { 'krivahtoo/silicon.nvim', run = "echo patito && ./install.sh build" }
 
 	-- Conflict marker
 	use "rhysd/conflict-marker.vim"
@@ -25,11 +24,11 @@ require('packer').startup(function(use)
 	use 'ThePrimeagen/git-worktree.nvim'
 
 	use "lilydjwg/colorizer"
-	use {'iamcco/markdown-preview.nvim', run = "cd app && npm install", setup = function ()
+	use { 'iamcco/markdown-preview.nvim', run = "cd app && npm install", setup = function()
 		vim.g.mkdp_filetypes = { "markdown" }
 	end, ft = { "markdown" } }
 	use 'tpope/vim-sleuth'
-	use { 'NeogitOrg/neogit', requires = 'nvim-lua/plenary.nvim', 'sindrets/diffview.nvim'}
+	use { 'NeogitOrg/neogit', requires = 'nvim-lua/plenary.nvim', 'sindrets/diffview.nvim' }
 	use 'folke/tokyonight.nvim'
 	use 'ellisonleao/gruvbox.nvim'
 	use 'Mofiqul/dracula.nvim'
@@ -45,7 +44,7 @@ require('packer').startup(function(use)
 		requires = {
 			'nvim-tree/nvim-web-devicons', -- optional, for file icons
 		},
-		tag = 'v1.1' -- optional, updated every week. (see issue #1193)
+		tag = 'v1.1'              -- optional, updated every week. (see issue #1193)
 	}
 
 	use {
@@ -101,7 +100,7 @@ require('packer').startup(function(use)
 	use 'nvim-lualine/lualine.nvim'
 	use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
 
-	use { 'ThePrimeagen/harpoon', requires = {'nvim-lua/plenary.nvim'} }
+	use { 'ThePrimeagen/harpoon', requires = { 'nvim-lua/plenary.nvim' } }
 
 	-- Fuzzy Finder (files, lsp, etc)
 	use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
@@ -182,7 +181,7 @@ vim.o.splitright = true
 
 -- Set colorscheme
 vim.o.termguicolors = true
-vim.cmd [[colorscheme catppuccin-frappe]]
+vim.cmd [[colorscheme catppuccin]]
 
 -- Set jk keymap to escape
 vim.keymap.set('i', 'jk', '<Esc>', { noremap = true })
@@ -222,7 +221,7 @@ require('lualine').setup {
 	options = {
 		icons_enabled = true,
 		component_separators = '/',
-		section_separators = { left = '', right = ''},
+		section_separators = { left = '', right = '' },
 	},
 }
 
@@ -253,7 +252,7 @@ require('gitsigns').setup {
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup {
-	file_ignore_patterns = {"node_modules/.*"},
+	file_ignore_patterns = { "node_modules/.*" },
 	defaults = {
 		mappings = {
 			i = {
@@ -297,13 +296,13 @@ vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { de
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 
-vim.keymap.set('n', '<leader>sq', require('telescope.builtin').quickfix, { desc = '[S]earch [Q]uickfix'})
+vim.keymap.set('n', '<leader>sq', require('telescope.builtin').quickfix, { desc = '[S]earch [Q]uickfix' })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
 	-- Add languages to be installed here that you want installed for treesitter
-	ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'help', 'vim', 'javascript', 'tsx', 'css'},
+	ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'help', 'vim', 'javascript', 'tsx', 'css' },
 	ignore_install = { "help" },
 
 	highlight = { enable = true },
@@ -374,7 +373,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 
 -- LSP settings.
 --  This function gets run when an LSP connects to a particular buffer.
-local on_attach = function(_, bufnr)
+local on_attach = function(client, bufnr)
 	-- NOTE: Remember that lua is a real programming language, and as such it is possible
 	-- to define small helper and utility functions so you don't have to repeat yourself
 	-- many times.
@@ -392,9 +391,9 @@ local on_attach = function(_, bufnr)
 	nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
 	nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
-	nmap('gd', function ()
+	nmap('gd', function()
 		vim.lsp.buf.definition {
-			on_list = function (options)
+			on_list = function(options)
 				vim.fn.setqflist({}, ' ', options)
 				require('telescope.builtin').quickfix()
 			end
@@ -422,6 +421,13 @@ local on_attach = function(_, bufnr)
 	vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
 		vim.lsp.buf.format()
 	end, { desc = 'Format current buffer with LSP' })
+
+	vim.api.nvim_create_autocmd("BufWritePre", {
+		buffer = bufnr,
+		callback = function ()
+			vim.cmd('EslintFixAll')
+		end
+	})
 end
 
 -- Enable the following language servers
@@ -536,32 +542,33 @@ require('nvim-tree').setup({
 })
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
-vim.keymap.set({'n', 'i'}, '<C-b>', function() vim.cmd('NvimTreeToggle') end)
-vim.keymap.set({'n', 'i', 'v'}, '<C-s>', function() vim.cmd('wa') end)
-vim.keymap.set({'n'}, '<leader>ff', function() vim.cmd('NvimTreeFindFile') end)
-vim.keymap.set({'n'}, '<leader>c', function() vim.cmd('NvimTreeCollapse') end)
+vim.keymap.set({ 'n', 'i' }, '<C-b>', function() vim.cmd('NvimTreeToggle') end)
+vim.keymap.set({ 'n', 'i', 'v' }, '<C-s>', function() vim.cmd('wa') end)
+vim.keymap.set({ 'n' }, '<leader>ff', function() vim.cmd('NvimTreeFindFile') end)
+vim.keymap.set({ 'n' }, '<leader>c', function() vim.cmd('NvimTreeCollapse') end)
 
 -- Harpoon commands
-vim.keymap.set({'n', 'v'}, '<C-h>', function() require('harpoon.ui').toggle_quick_menu() end,{desc = "Toggle Harpoon"})
-vim.keymap.set({'n', 'v'}, '<leader>b', function ()
+vim.keymap.set({ 'n', 'v' }, '<C-h>', function() require('harpoon.ui').toggle_quick_menu() end,
+	{ desc = "Toggle Harpoon" })
+vim.keymap.set({ 'n', 'v' }, '<leader>b', function()
 	require('harpoon.mark').add_file()
 	print("File marked!")
 end)
-vim.keymap.set({'n', 'v'}, '<leader>1', function ()
+vim.keymap.set({ 'n', 'v' }, '<leader>1', function()
 	require('harpoon.ui').nav_file(1);
 end)
-vim.keymap.set({'n', 'v'}, '<leader>2', function ()
+vim.keymap.set({ 'n', 'v' }, '<leader>2', function()
 	require('harpoon.ui').nav_file(2);
 end)
-vim.keymap.set({'n', 'v'}, '<leader>3', function ()
+vim.keymap.set({ 'n', 'v' }, '<leader>3', function()
 	require('harpoon.ui').nav_file(3);
 end)
-vim.keymap.set({'n', 'v'}, '<leader>4', function ()
+vim.keymap.set({ 'n', 'v' }, '<leader>4', function()
 	require('harpoon.ui').nav_file(4);
 end)
 
 -- Show current file path
-vim.keymap.set({'n'}, '<leader>o', function ()
+vim.keymap.set({ 'n' }, '<leader>o', function()
 	print(vim.fn.expand('%'))
 end)
 
