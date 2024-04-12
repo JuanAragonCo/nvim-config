@@ -425,7 +425,9 @@ local on_attach = function(client, bufnr)
 	vim.api.nvim_create_autocmd("BufWritePre", {
 		buffer = bufnr,
 		callback = function ()
-			vim.cmd('EslintFixAll')
+			if vim.fn.exists(':EslintFixAll') > 0 then
+				vim.cmd('EslintFixAll')
+			end
 		end
 	})
 end
