@@ -19,6 +19,14 @@ require('packer').startup(function(use)
 	-- Conflict marker
 	use "rhysd/conflict-marker.vim"
 
+	-- Oil / Manage files like vim buffer
+	use({
+		"stevearc/oil.nvim",
+		config = function()
+			require("oil").setup()
+		end
+	})
+
 	-- Git worktreee
 
 	use 'ThePrimeagen/git-worktree.nvim'
@@ -424,7 +432,7 @@ local on_attach = function(client, bufnr)
 
 	vim.api.nvim_create_autocmd("BufWritePre", {
 		buffer = bufnr,
-		callback = function ()
+		callback = function()
 			if vim.fn.exists(':EslintFixAll') > 0 then
 				vim.cmd('EslintFixAll')
 			end
@@ -567,6 +575,11 @@ vim.keymap.set({ 'n', 'v' }, '<leader>3', function()
 end)
 vim.keymap.set({ 'n', 'v' }, '<leader>4', function()
 	require('harpoon.ui').nav_file(4);
+end)
+
+-- Oil commands
+vim.keymap.set({'n'}, '<leader>oo', function()
+	require('oil').open();
 end)
 
 -- Show current file path
