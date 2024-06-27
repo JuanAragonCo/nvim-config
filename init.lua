@@ -37,7 +37,6 @@ require('packer').startup(function(use)
 	end, ft = { "markdown" } }
 	use 'tpope/vim-sleuth'
 	use { 'NeogitOrg/neogit', requires = 'nvim-lua/plenary.nvim', 'sindrets/diffview.nvim' }
-	use 'folke/tokyonight.nvim'
 	use 'ellisonleao/gruvbox.nvim'
 	use 'Mofiqul/dracula.nvim'
 	use 'wbthomason/packer.nvim'
@@ -194,7 +193,7 @@ vim.o.splitright = true
 
 -- Set colorscheme
 vim.o.termguicolors = true
-vim.cmd [[colorscheme catppuccin]]
+vim.cmd [[colorscheme evening]]
 
 -- Set jk keymap to escape
 vim.keymap.set('i', 'jk', '<Esc>', { noremap = true })
@@ -600,6 +599,24 @@ require('neogit').setup {
 		diffview = true
 	}
 }
+
+-- Utility function for going through the colorschemes
+vim.keymap.set({ 'n' }, '<leader>cs', function()
+	local current_scheme = vim.g.colors_name
+	-- print('color = %s', current_scheme)
+	local schemes = vim.fn.getcompletion('', 'color')
+	for i=0,(#schemes - 1) do
+		local scheme = schemes[i]
+		if(scheme == current_scheme) then
+			local new_index = i + 1;
+			if (new_index >= #schemes) then
+				new_index = 1
+			end
+			print(string.format('[%s] - %d/%d', schemes[new_index], new_index, #schemes))
+			vim.cmd(string.format('colorscheme %s', schemes[new_index]))
+		end
+	end
+end)
 
 -- Silicon config
 
