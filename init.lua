@@ -41,12 +41,17 @@ require('packer').startup(function(use)
 	use 'ellisonleao/gruvbox.nvim'
 	use 'Mofiqul/dracula.nvim'
 	use 'wbthomason/packer.nvim'
-	use 'mattn/emmet-vim'
 	use 'tpope/vim-dispatch'
 	use 'windwp/nvim-ts-autotag'
 	use 'neoclide/vim-jsx-improve'
 	use 'windwp/nvim-autopairs'
 	use 'tpope/vim-surround'
+	use { 'olrtg/nvim-emmet',
+		config = function ()
+			vim.keymap.set({ "n", "v" }, '<leader>xe', require('nvim-emmet').wrap_with_abbreviation)
+		end
+
+	}
 	use {
 		'nvim-tree/nvim-tree.lua',
 		requires = {
