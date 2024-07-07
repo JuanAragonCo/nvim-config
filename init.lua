@@ -193,7 +193,7 @@ vim.o.splitright = true
 
 -- Set colorscheme
 vim.o.termguicolors = true
-vim.cmd [[colorscheme evening]]
+vim.cmd [[colorscheme gruvbox]]
 
 -- Set jk keymap to escape
 vim.keymap.set('i', 'jk', '<Esc>', { noremap = true })
