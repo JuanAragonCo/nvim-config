@@ -193,7 +193,7 @@ vim.o.splitright = true
 
 -- Set colorscheme
 vim.o.termguicolors = true
-vim.cmd [[colorscheme evening]]
+vim.cmd [[colorscheme gruvbox]]
 
 -- Set jk keymap to escape
 vim.keymap.set('i', 'jk', '<Esc>', { noremap = true })
@@ -547,11 +547,17 @@ cmp.setup {
 require('nvim-tree').setup({
 	git = {
 		enable = true,
-		ignore = false
+		ignore = false,
+		timeout = 1000
 	},
 	view = {
 		number = true,
 		relativenumber = true
+	},
+	actions = {
+		open_file = {
+			quit_on_open = true
+		}
 	}
 })
 vim.g.loaded_netrw = 1
