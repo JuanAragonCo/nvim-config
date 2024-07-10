@@ -8,6 +8,9 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
 end
 
 require('packer').startup(function(use)
+
+	use 'mfussenegger/nvim-jdtls'
+
 	-- Package manager
 	-- Catppuccin color-scheme
 	use { 'catppuccin/nvim', as = 'catppuccin' }
