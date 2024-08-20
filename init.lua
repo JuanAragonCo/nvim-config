@@ -11,6 +11,8 @@ require('packer').startup(function(use)
 
 	-- big files
 	use { 'LunarVim/bigfile.nvim' }
+	-- JAVA LSP
+	use 'mfussenegger/nvim-jdtls'
 
 	-- Package manager
 	-- Catppuccin color-scheme
