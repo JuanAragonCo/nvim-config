@@ -281,6 +281,11 @@ require('telescope').setup {
 	},
 }
 
+
+-- Setup autotags
+require('nvim-ts-autotag').setup({
+})
+
 -- Git worktree
 require('git-worktree').setup()
 require('telescope').load_extension('git_worktree')
@@ -324,9 +329,6 @@ require('nvim-treesitter.configs').setup {
 	ignore_install = { "help" },
 
 	highlight = { enable = true },
-	autotag = {
-		enable = true
-	},
 	indent = { enable = true, disable = { 'python', 'typescriptreact' } },
 	incremental_selection = {
 		enable = true,
@@ -460,7 +462,6 @@ local servers = {
 	-- gopls = {},
 	-- pyright = {},
 	-- rust_analyzer = {},
-	tsserver = {},
 	cssls = {},
 	eslint = {},
 	html = {},
